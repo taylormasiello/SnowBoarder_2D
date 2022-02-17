@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour
             RespondToBoost();
         }
 
+        // Quits application if user hits escape
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
     }
 
     public void DisableControls()
