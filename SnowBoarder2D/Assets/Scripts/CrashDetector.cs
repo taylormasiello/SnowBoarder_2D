@@ -10,6 +10,8 @@ public class CrashDetector : MonoBehaviour
     [SerializeField] ParticleSystem crashEffect;
     [SerializeField] AudioClip crashSFX;
 
+    SurfaceEffector2D surfaceEffector2D;
+
     bool hasCrashed = false;
 
     void OnTriggerEnter2D(Collider2D other)
@@ -18,6 +20,9 @@ public class CrashDetector : MonoBehaviour
         if (other.tag == "Ground" && !hasCrashed && other.IsTouching(gameObject.GetComponent<CircleCollider2D>()))
         {
             hasCrashed = true;
+            surfaceEffector2D = FindObjectOfType<SurfaceEffector2D>();
+
+            surfaceEffector2D.speed = 0F;
             FindObjectOfType<PlayerController>().DisableControls();
             crashEffect.Play();
             GetComponent<AudioSource>().PlayOneShot(crashSFX);

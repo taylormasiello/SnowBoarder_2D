@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float torqueAmout = 1F;
+    [SerializeField] float torque = 35F;
     [SerializeField] float boostSpeed = 75F;
     [SerializeField] float baseSpeed = 50F;
 
@@ -21,12 +21,21 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(canMove)
+        Move();
+        EndGame();
+    }
+
+    void Move()
+    {
+        if (canMove)
         {
             RotatePlayer();
             RespondToBoost();
         }
+    }
 
+    void EndGame()
+    {
         // Quits application if user hits escape
         if (Input.GetKey("escape"))
         {
@@ -55,11 +64,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            rb2D.AddTorque(torqueAmout);
+            rb2D.AddTorque(torque);
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            rb2D.AddTorque(-torqueAmout);
+            rb2D.AddTorque(-torque);
         }
     }
 }
